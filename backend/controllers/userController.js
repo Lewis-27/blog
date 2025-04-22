@@ -107,10 +107,27 @@ const updateUserProfile = asyncHandler(async (req, res) => {
   }
 })
 
+// @ desc       Update user profile
+// router       PUT /api/users/profile
+// @ access     Private
+const getUser = asyncHandler(async (req, res) => {
+  const user = await User.findById(req.params.id);
+  if(user){
+    res.status(200).json({
+      name: user.name
+    })
+  } else {
+    res.status(404);
+    throw new Error('User not found')
+  }
+  
+})
+
 export {
   authUser,
   registerUser,
   logoutUser,
   getUserProfile,
-  updateUserProfile
+  updateUserProfile,
+  getUser
 };

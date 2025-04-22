@@ -3,6 +3,7 @@ import dotenv from 'dotenv'
 import cookieParser from 'cookie-parser';
 
 import userRoutes from './routes/userRoutes.js'
+import postRoutes from './routes/postRoutes.js'
 
 import { notFound, errorHandler } from './middleware/errorMiddleware.js';
 
@@ -21,6 +22,7 @@ app.use(cookieParser());
 connectDB();
 
 app.use('/api/users', userRoutes);
+app.use('/api/posts', postRoutes);
 
 app.use(notFound);
 app.use(errorHandler);
