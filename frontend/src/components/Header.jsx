@@ -37,8 +37,10 @@ const Header = () => {
             <FaChevronDown className='' />
           </button>
           {dropdown 
-            ? <div className='absolute bg-gray-200 px-2 py-2 w-20 top-8 right-0 rounded-lg shadow-lg flex flex-col gap-1 border border-gray-300'>
+            ? <div className='absolute bg-gray-200 px-2 py-2 w-28 top-8 right-0 rounded-lg shadow-lg flex flex-col gap-1 border border-gray-300'>
               <Link to='/profile' onClick={() => setDropdown(false)}>Profile</Link>
+              <hr className='text-gray-400'/>
+              <Link to='/newPost' onClick={() => setDropdown(false)}>New post</Link>
               <hr className='text-gray-400'/>
               <button 
                 type="button" 

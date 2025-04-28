@@ -7,6 +7,7 @@ import HomeScreen from './screens/HomeScreen.jsx'
 import LoginScreen from './screens/LoginScreen.jsx'
 import RegisterScreen from './screens/RegisterScreen.jsx'
 import NotFoundScreen from './screens/NotFoundScreen.jsx'
+import ProfileScreen from './screens/ProfileScreen.jsx'
 
 import { createBrowserRouter, createRoutesFromElements, Route, RouterProvider, Navigate } from 'react-router-dom';
 import store from './store.js'
@@ -18,6 +19,7 @@ const router = createBrowserRouter(
       <Route index={true} path='/' element={ <HomeScreen /> } />
       <Route path='/login' element={ <LoginScreen /> }/>
       <Route path='/register' element={ <RegisterScreen /> } />
+      <Route path='/profile' element={ <ProfileScreen /> } />
 
       <Route path='*' element={<Navigate to='/404'/>} />
       <Route path='/404' element={ <NotFoundScreen /> } />

@@ -46,6 +46,7 @@ const SignInForm = () => {
       toast.success('Logged in!')
       navigate('/')
     } catch (err) {
+      toast.error('Invalid email or password, please try again')
       console.log(err)
     }
   }

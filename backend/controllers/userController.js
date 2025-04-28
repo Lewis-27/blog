@@ -109,7 +109,7 @@ const updateUserProfile = asyncHandler(async (req, res) => {
 
 // @ desc       Update user profile
 // router       PUT /api/users/profile
-// @ access     Private
+// @ access     Public
 const getUser = asyncHandler(async (req, res) => {
   const user = await User.findById(req.params.id);
   if(user){
@@ -120,7 +120,6 @@ const getUser = asyncHandler(async (req, res) => {
     res.status(404);
     throw new Error('User not found')
   }
-  
 })
 
 export {
