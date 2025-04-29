@@ -32,12 +32,34 @@ const createPost = asyncHandler(async (req, res) => {
 // route    GET /api/posts
 // @access  Public
 const getAllPosts = asyncHandler(async (req, res) => {
-  const posts = await Post.find();
-  console.log(posts);
+  const limit = req.query.limit
+  let posts;
+  if(limit){
+    posts = await Post.find().limit(limit)
+  } else {
+    posts = await Post.find();
+  }
   res.status(200).json({
     posts
   })
 })
+
+// @desc    get recent posts
+// route    GET /api/posts/recent
+// @access  Public
+const getRecentPosts = asyncHandler(async (req, res) => {
+  const limit = req.query.limit
+  let posts;
+  if(limit){
+    posts = await Post.find().sort({'updatedAt': -1}).limit(limit);
+  } else {
+    posts = await Post.find().sort({'updatedAt': -1});
+  }
+  res.status(200).json({
+    posts
+  })
+})
+
 
 // @desc    get post
 // route    GET /api/posts/:id
@@ -45,15 +67,18 @@ const getAllPosts = asyncHandler(async (req, res) => {
 const getPost = asyncHandler(async (req, res) => {
   const postId = req.params.id
   const post = await Post.findById(postId)
+
+  console.log(post)
   
   if(post) {
-    res.status(200).json({
-      _id: post._id,
-      title: post.title,
-      body: post.body,
-      tags: post.tags,
-      userId: post.userId
-  })
+    res.status(200).json(post);
+  //   res.status(200).json({
+  //     _id: post._id,
+  //     title: post.title,
+  //     body: post.body,
+  //     tags: post.tags,
+  //     userId: post.userId
+  // })
   } else {
     res.status(404);
     throw new Error('Post not found')
@@ -119,6 +144,7 @@ const updatePost = asyncHandler(async (req, res) => {
 export {
   createPost,
   getAllPosts,
+  getRecentPosts,
   getPost,
   deletePost,
   updatePost

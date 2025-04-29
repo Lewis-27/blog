@@ -8,6 +8,7 @@ import LoginScreen from './screens/LoginScreen.jsx'
 import RegisterScreen from './screens/RegisterScreen.jsx'
 import NotFoundScreen from './screens/NotFoundScreen.jsx'
 import ProfileScreen from './screens/ProfileScreen.jsx'
+import PostScreen from './screens/PostScreen.jsx'
 
 import { createBrowserRouter, createRoutesFromElements, Route, RouterProvider, Navigate } from 'react-router-dom';
 import store from './store.js'
@@ -20,6 +21,7 @@ const router = createBrowserRouter(
       <Route path='/login' element={ <LoginScreen /> }/>
       <Route path='/register' element={ <RegisterScreen /> } />
       <Route path='/profile' element={ <ProfileScreen /> } />
+      <Route path='/posts/:postId' element={ <PostScreen /> }/>
 
       <Route path='*' element={<Navigate to='/404'/>} />
       <Route path='/404' element={ <NotFoundScreen /> } />
