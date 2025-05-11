@@ -9,7 +9,7 @@ import { setCredentials } from '../slices/authSlice'
 
 import { toast } from 'react-toastify'
 
-const UpdateForm = () => {
+const UpdateForm = ({setEditing}) => {
   const {userInfo} = useSelector((state) => state.auth);
 
   const [name, setName] = useState(userInfo.name);
@@ -49,6 +49,7 @@ const UpdateForm = () => {
       const res = await updateUserApiCall(user).unwrap();
       dispatch(setCredentials({...res}))
       toast.success('Profile updated')
+      setEditing(false);
       navigate('/profile')
     } catch (err) {
       toast.error('Something went wrong updating your profile')
@@ -57,11 +58,8 @@ const UpdateForm = () => {
   }
 
   return (
-      <div className='h-180 w-1/2 flex flex-col items-center justify-center gap-6 '>
-        <div className="flex flex-col items-center justify-center gap-1">
-          <h1 className="text-4xl w-full">Your info</h1>
-          <p className="text-xl text-gray-500 ">Register now and start posting</p>
-        </div>
+      <div className=' w-1/2 flex flex-col items-center justify-center gap-6 '>
+        
         
         <form 
           action="submit"

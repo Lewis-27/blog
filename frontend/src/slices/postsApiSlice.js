@@ -5,17 +5,17 @@ const POSTS_URL = '/api/posts'
 export const postsApiSlice = apiSlice.injectEndpoints({
   endpoints: (builder) => ({
     getAllPosts: builder.mutation({
-      query: () => ({
-        url: `${POSTS_URL}`,
+      query: (query) => ({
+        url: `${POSTS_URL}?${query}`,
         method: 'GET'
       })
     }),
-    getLimitedPosts: builder.mutation({
-      query: (data) => ({
-        url: `${POSTS_URL}?limit=${data}`,
-        method: 'GET'
-      })
-    }),
+    // getLimitedPosts: builder.mutation({
+    //   query: (data) => ({
+    //     url: `${POSTS_URL}?limit=${data}`,
+    //     method: 'GET'
+    //   })
+    // }),
     getRecentPosts: builder.mutation({
       query: () => ({
         url: `${POSTS_URL}/recent`,
@@ -23,8 +23,8 @@ export const postsApiSlice = apiSlice.injectEndpoints({
       })
     }),
     getLimitedRecentPosts: builder.mutation({
-      query: (data) => ({
-        url: `${POSTS_URL}/recent?limit=${data}`,
+      query: (query) => ({
+        url: `${POSTS_URL}/recent?${query}`,
         method: 'GET'
       })
     }),
@@ -33,8 +33,44 @@ export const postsApiSlice = apiSlice.injectEndpoints({
         url: `${POSTS_URL}/${postId}`,
         method: 'GET'
       })
+    }),
+    getUserPosts: builder.mutation({
+      query: (data) => ({
+        url: `${POSTS_URL}/user/${data.userId}?${data.query}`,
+        method: 'GET'
+      })
+    }),
+    createNewPost: builder.mutation({
+      query: (data) => ({
+        url: `${POSTS_URL}`,
+        method: 'POST',
+        body: data
+      })
+    }),
+    editPost: builder.mutation({
+      query: (data) => ({
+        url: `${POSTS_URL}/${data.postId}`,
+        method: 'PUT',
+        body: data.body
+      })
+    }),
+    deletePost: builder.mutation({
+      query: (postId) => ({
+        url: `${POSTS_URL}/${postId}`,
+        method: 'DELETE',
+      })
     })
   })
 })
 
-export const {useGetAllPostsMutation, useGetLimitedPostsMutation, useGetRecentPostsMutation, useGetLimitedRecentPostsMutation, useGetPostMutation} = postsApiSlice
+export const {
+  useGetAllPostsMutation, 
+  useGetLimitedPostsMutation, 
+  useGetRecentPostsMutation, 
+  useGetLimitedRecentPostsMutation, 
+  useGetPostMutation, 
+  useGetUserPostsMutation,
+  useCreateNewPostMutation,
+  useEditPostMutation,
+  useDeletePostMutation
+} = postsApiSlice

@@ -7,6 +7,7 @@ import {
   getAllPosts,
   getRecentPosts,
   getPost,
+  getUserPosts,
   deletePost,
   updatePost
 } from '../controllers/postController.js'
@@ -17,6 +18,7 @@ router.post('/', protect, createPost);
 router.get('/', getAllPosts);
 router.get('/recent', getRecentPosts);
 router.get('/:id', getPost);
+router.get('/user/:id', getUserPosts);
 router.delete('/:id', protect, deletePost);
 router.put('/:id', protect, updatePost);
 

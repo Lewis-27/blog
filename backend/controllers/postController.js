@@ -33,12 +33,26 @@ const createPost = asyncHandler(async (req, res) => {
 // @access  Public
 const getAllPosts = asyncHandler(async (req, res) => {
   const limit = req.query.limit
+  const sort = req.query.sort
+  const userId = req.query.userId
   let posts;
-  if(limit){
-    posts = await Post.find().limit(limit)
+  if(userId){
+    if(limit){
+      posts = await Post.find({'userId': userId}).limit(limit)
+    } else {
+      posts = await Post.find({'userId': userId});
+    }
   } else {
-    posts = await Post.find();
+    if(sort){
+      if(limit){
+        posts = await Post.find().sort({'updatedAt': sort}).limit(limit)
+      } else {
+        posts = await Post.find().sort({'updatedAt': sort});
+      }
+    }
+    
   }
+  
   res.status(200).json({
     posts
   })
@@ -48,12 +62,24 @@ const getAllPosts = asyncHandler(async (req, res) => {
 // route    GET /api/posts/recent
 // @access  Public
 const getRecentPosts = asyncHandler(async (req, res) => {
+  const userId = req.query.userId;
   const limit = req.query.limit
   let posts;
-  if(limit){
+  if(userId){
+    console.log(userId)
+    if(limit){
+      posts = await Post.find({'userId': userId}).sort({'updatedAt': -1}).limit(limit);
+      console.log(posts)
+    } else {
+      posts = await Post.find({'userId': userId}).sort({'updatedAt': -1});
+      console.log(posts)
+    }    
+  } else {
+    if(limit){
     posts = await Post.find().sort({'updatedAt': -1}).limit(limit);
   } else {
     posts = await Post.find().sort({'updatedAt': -1});
+  }
   }
   res.status(200).json({
     posts
@@ -67,8 +93,6 @@ const getRecentPosts = asyncHandler(async (req, res) => {
 const getPost = asyncHandler(async (req, res) => {
   const postId = req.params.id
   const post = await Post.findById(postId)
-
-  console.log(post)
   
   if(post) {
     res.status(200).json(post);
@@ -84,6 +108,43 @@ const getPost = asyncHandler(async (req, res) => {
     throw new Error('Post not found')
   }
 })
+
+// @desc    get users posts
+// route    GET /api/posts/user/:id
+// @access  Public
+const getUserPosts = asyncHandler(async (req, res) => {
+  const userId = req.params.id
+  
+  const limit = req.query.limit
+
+  const sort = req.query.sort
+
+  let posts;
+
+  if(sort) {
+    if(limit) {
+      posts = await Post.find({'userId': userId}).sort({'updatedAt': sort}).limit(limit)
+    } else {
+      posts = await Post.find({'userId': userId}).sort({'updatedAt': sort})
+    }
+    
+    res.status(200).json(posts);
+  } 
+
+  if(limit) {
+    posts = await Post.find({'userId': userId}).limit(limit)
+  } else {
+    posts = await Post.find({'userId': userId})
+  }
+  
+  if(posts) {
+    res.status(200).json(posts);
+  } else {
+    res.status(404);
+    throw new Error('Post not found')
+  }
+})
+
 
 // @desc    delete post
 // route    DELETE /api/posts/:id
@@ -146,6 +207,7 @@ export {
   getAllPosts,
   getRecentPosts,
   getPost,
+  getUserPosts,
   deletePost,
   updatePost
 };

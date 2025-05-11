@@ -2,9 +2,30 @@ import React from 'react'
 import { useSelector } from 'react-redux'
 import { Link } from 'react-router-dom'
 import {FaPlus} from 'react-icons/fa'
+import { useGetUserPostsMutation } from '../slices/postsApiSlice'
+import { useState, useEffect } from 'react'
+import PostSmall from '../components/PostSmall'
 
 const WelcomeBanner = () => {
   const {userInfo} = useSelector((state) => state.auth)
+
+  const [getUserPostsApiCall] = useGetUserPostsMutation();
+
+  const [recentPost, setRecentPost] = useState('');
+  const [isLoading, setIsLoading] = useState(true);
+
+  useEffect(() => {
+    const getRecentPost = async () => {
+      console.log(userInfo._id)
+      const res = await getUserPostsApiCall({
+        userId: userInfo._id,
+        query: 'limit=1&sort=desc',
+      }).unwrap();
+      setRecentPost(res[0]);
+      setIsLoading(false);
+    }
+    getRecentPost();
+  }, [])
 
   return (
     <div className='w-full flex items-center justify-evenly h-128 text-xl'>
@@ -19,10 +40,18 @@ const WelcomeBanner = () => {
           
         </Link>
       </div>
-      <div className="w-1/4 flex flex-col gap-4 items-center justify-center">
-        <h2>Latest post</h2>
-        <div className="bg-gray-200 w-full h-64">Post</div>
-      </div>
+      {isLoading ? <h1>Loading...</h1> : <></>}
+      {(!isLoading && recentPost) ? <div className='w-1/2 flex flex-col gap-4 items-center justify-center'>
+        <h2>Your latest post</h2>
+        <PostSmall postData={recentPost}/></div> : <></>
+        // <div className="w-1/2 flex flex-col gap-4 items-center justify-center">
+        
+        // <div className="flex flex-col">
+        //   <h1>It looks like you havent made any posts</h1>
+        // </div> 
+        
+      // </div>
+      }
       
     </div>
   )

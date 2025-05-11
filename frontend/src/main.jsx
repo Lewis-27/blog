@@ -9,6 +9,10 @@ import RegisterScreen from './screens/RegisterScreen.jsx'
 import NotFoundScreen from './screens/NotFoundScreen.jsx'
 import ProfileScreen from './screens/ProfileScreen.jsx'
 import PostScreen from './screens/PostScreen.jsx'
+import CreatePostScreen from './screens/CreatePostScreen.jsx'
+import EditPostScreen from './screens/EditPostScreen.jsx'
+import AllPostsScreen from './screens/AllPostsScreen.jsx'
+import UserProfileScreen from './screens/UserProfileScreen.jsx'
 
 import { createBrowserRouter, createRoutesFromElements, Route, RouterProvider, Navigate } from 'react-router-dom';
 import store from './store.js'
@@ -21,8 +25,11 @@ const router = createBrowserRouter(
       <Route path='/login' element={ <LoginScreen /> }/>
       <Route path='/register' element={ <RegisterScreen /> } />
       <Route path='/profile' element={ <ProfileScreen /> } />
+      <Route path='/users/:id' element={ <UserProfileScreen /> }/>
+      <Route path='/posts' element={ <AllPostsScreen /> }/>
       <Route path='/posts/:postId' element={ <PostScreen /> }/>
-
+      <Route path='/posts/:postId/edit' element={ <EditPostScreen /> }/>
+      <Route path='/newPost' element={ <CreatePostScreen /> }/>
       <Route path='*' element={<Navigate to='/404'/>} />
       <Route path='/404' element={ <NotFoundScreen /> } />
     </Route>

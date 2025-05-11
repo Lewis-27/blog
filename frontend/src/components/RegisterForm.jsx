@@ -118,7 +118,7 @@ const RegisterForm = () => {
           <button 
             type="submit"
             className='w-80 rounded-full py-2 px-6  bg-blue-500 text-white mt-6 cursor-pointer hover:bg-blue-700 transition duration-200'
-          >Sign In</button>
+          >Sign Up</button>
       </form>
       <div className="flex gap-1">  
         <h2 className="text-md text-gray-500">Already a member?</h2>

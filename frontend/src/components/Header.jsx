@@ -28,7 +28,7 @@ const Header = () => {
     }
   }
   return (
-    <div className='w-full h-16 text-lg flex justify-between px-8 items-center'>
+    <div className='w-full h-16 text-lg flex justify-between px-8 items-center sticky top-0 '>
       <Link className='text-2xl' to={'/'}>Blog</Link>
       {userInfo
         ? <div className='relative'>

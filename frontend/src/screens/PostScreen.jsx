@@ -2,6 +2,8 @@ import React from 'react'
 import { useEffect, useState } from 'react'
 import { useParams } from 'react-router-dom'
 import {useGetPostMutation} from '../slices/postsApiSlice'
+import { useNavigate } from 'react-router-dom'
+import { toast } from 'react-toastify'
 
 import PostLarge from '../components/PostLarge'
 
@@ -11,11 +13,19 @@ const PostScreen = () => {
   const [post, setPost] = useState();
   const [isLoading, setIsLoading] = useState(true);
 
+  const navigate = useNavigate();
+
   useEffect(() => {
     const getPost = async () => {
-      const res = await getPostApiCall(postId).unwrap();
+      try {
+        const res = await getPostApiCall(postId).unwrap();
       setPost(res)
       setIsLoading(false);
+      } catch (error) {
+        toast.error('Post not found')
+        navigate('/')
+      }
+      
     }
     getPost();
   }, [isLoading])
@@ -23,7 +33,7 @@ const PostScreen = () => {
   
 
   return (
-    <div className='w-full h-180 flex items-center justify-center py-16'>
+    <div className='w-full min-h-180 flex items-center justify-center py-16'>
       {(isLoading ? <></> : <PostLarge postData={post}/> )}
     </div>
   )
