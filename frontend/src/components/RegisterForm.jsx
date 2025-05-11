@@ -68,6 +68,7 @@ const RegisterForm = () => {
           name="name" 
           id="name"
           placeholder='Name'
+          required
           value={name}
           onChange={(e) => {setName(e.target.value)}}
           className=' w-80 rounded-full py-2 px-6 border border-gray-500 focus:outline-blue-500' 
@@ -77,6 +78,7 @@ const RegisterForm = () => {
           name="email" 
           id="email"
           placeholder='Email'
+          required
           value={email}
           onChange={(e) => {setEmail(e.target.value)}}
           className=' w-80 rounded-full py-2 px-6 border border-gray-500 focus:outline-blue-500' 
@@ -87,6 +89,7 @@ const RegisterForm = () => {
               name="password" 
               id="password"
               placeholder='Password'
+              required
               value={password}
               onChange={(e) => {setPassword(e.target.value)}}
               className='relative w-80 rounded-full py-2 px-6 border border-gray-500 focus:outline-blue-500' 
@@ -104,6 +107,7 @@ const RegisterForm = () => {
               name="confirmPassword" 
               id="confirmPassword"
               placeholder='Confirm password'
+              required
               value={confirmPassword}
               onChange={(e) => {setConfirmPassword(e.target.value)}}
               className='relative w-80 rounded-full py-2 px-6 border border-gray-500 focus:outline-blue-500' 

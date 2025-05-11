@@ -23,7 +23,7 @@ const ProfileScreen = () => {
 
   return (
     <div>
-      <div className="flex items-center justify-center gap-8 px-16 h-180">
+      <div className="flex items-center justify-center gap-16 px-16 h-180">
         <div className='flex flex-col items-center justify-center h-128 gap-8'>
           <div className="flex flex-col items-center justify-center gap-1  w-full ">
             <div className="flex gap-2 w-full items-center justify-center ">
