@@ -14,6 +14,7 @@ import EditPostScreen from './screens/EditPostScreen.jsx'
 import AllPostsScreen from './screens/AllPostsScreen.jsx'
 import UserProfileScreen from './screens/UserProfileScreen.jsx'
 import UsersScreen from './screens/UsersScreen.jsx'
+import AboutScreen from './screens/AboutScreen.jsx'
 
 import { createBrowserRouter, createRoutesFromElements, Route, RouterProvider, Navigate } from 'react-router-dom';
 import store from './store.js'
@@ -32,6 +33,7 @@ const router = createBrowserRouter(
       <Route path='/posts/:postId' element={ <PostScreen /> }/>
       <Route path='/posts/:postId/edit' element={ <EditPostScreen /> }/>
       <Route path='/newPost' element={ <CreatePostScreen /> }/>
+      <Route path='/about' element={ <AboutScreen /> } />
       <Route path='*' element={<Navigate to='/404'/>} />
       <Route path='/404' element={ <NotFoundScreen /> } />
     </Route>

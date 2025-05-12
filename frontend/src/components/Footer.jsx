@@ -34,7 +34,7 @@ const Footer = () => {
 
       <div className="flex flex-col">
         <h2 className='text-2xl font-semibold'>About</h2>
-        <Link to={'/'}>About this site</Link>
+        <Link to={'/about'}>About this site</Link>
         <Link to={'/'}>About me</Link>
         <Link to={'/'}>Portfolio</Link>
       </div>
