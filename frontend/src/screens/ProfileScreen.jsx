@@ -23,7 +23,7 @@ const ProfileScreen = () => {
 
   return (
     <div>
-      <div className="flex items-center justify-center gap-16 px-16 h-180">
+      <div className="flex flex-col lg:flex-row items-center justify-center gap-16 px-16 min-h-180">
         <div className='flex flex-col items-center justify-center h-128 gap-8'>
           <div className="flex flex-col items-center justify-center gap-1  w-full ">
             <div className="flex gap-2 w-full items-center justify-center ">
@@ -37,7 +37,7 @@ const ProfileScreen = () => {
           </div>
           {editing ? <UpdateForm setEditing={setEditing}/> : <UserInformation />}
         </div>
-        <div className="h-180 w-1/2 flex flex-col items-center justify-center gap-6 ">
+        <div className="h-180 w-full lg:w-1/2 flex flex-col items-center justify-center gap-6 ">
           <PostsProfile />
         </div>
       </div>

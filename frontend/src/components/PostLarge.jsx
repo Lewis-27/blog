@@ -63,7 +63,7 @@ const PostLarge = ({postData}) => {
     // }
 
   return (
-    <div className='border border-gray-400 shadow-lg w-2/3 h-full flex flex-col items-start justify-around py-4 px-4 rounded-lg text-lg'>
+    <div className='border border-gray-400 shadow-lg w-full mx-4 lg:w-2/3 lg:mx-0 h-full flex flex-col items-start justify-around py-4 px-4 rounded-lg text-lg'>
       <div className="flex gap-2 items-center">
         <h1 className=' '>{title}</h1>
         <div className="flex gap-1 items-center">
@@ -74,14 +74,15 @@ const PostLarge = ({postData}) => {
       <hr className='w-full text-gray-400 my-2'/>
       <p className="min-h-20 flex-grow whitespace-pre-wrap">{body}</p>
       <hr className='w-full text-gray-400 my-4'/>
-      <div className="flex w-full items-center gap-2">
-        
+      <div className="flex w-full items-center justify-between gap-2">
+
           <h3>Tags: </h3>
-          <div className='flex items-center gap-4 overflow-x-scroll p-1'>
+          <div className='flex items-center gap-2 overflow-x-scroll p-2 min-h-14 grow'>
             {tags.map((tag) => {
               return <div className="text-lg rounded-lg outline-dashed outline outline-gray-400 px-2 py-1 text-nowrap">{tag}</div>
             })}
-          </div>
+        </div>
+          
           
         {postOwner ? <div className="flex items-center gap-4 text-nowrap">
           <Link to={`/posts/${_id}/edit`} className='px-4 py-2 bg-blue-500 text-white rounded-md hover:bg-blue-700 transition duration-300'>Edit Post</Link>

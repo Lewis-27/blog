@@ -28,7 +28,7 @@ const WelcomeBanner = () => {
   }, [])
 
   return (
-    <div className='w-full flex items-center justify-evenly h-128 text-xl'>
+    <div className='w-full flex flex-col lg:flex-row items-center justify-evenly h-128 text-xl'>
       <div className="flex flex-col gap-4 items-center justify-center">
         <h1 className="text-3xl">Welcome {userInfo.name}</h1>
         <p className="">Ready to share your ideas?</p>
@@ -41,7 +41,7 @@ const WelcomeBanner = () => {
         </Link>
       </div>
       {isLoading ? <h1>Loading...</h1> : <></>}
-      {(!isLoading && recentPost) ? <div className='w-1/2 flex flex-col gap-4 items-center justify-center'>
+      {(!isLoading && recentPost) ? <div className='w-3/4 lg:w-1/2 flex flex-col gap-4 items-center justify-center'>
         <h2>Your latest post</h2>
         <PostSmall postData={recentPost}/></div> : <></>
         // <div className="w-1/2 flex flex-col gap-4 items-center justify-center">
