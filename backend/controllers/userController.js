@@ -122,11 +122,25 @@ const getUser = asyncHandler(async (req, res) => {
   }
 })
 
+// @ desc       Get all users
+// router       /api/users
+// @ access     Public
+const getAllUsers = asyncHandler(async (req, res) => {
+  const users = await User.find({},'-password');
+  if(users){
+    res.status(200).json(users)
+  } else {
+    res.status(404);
+    throw new Error('Error fetching users')
+  }
+})
+
 export {
   authUser,
   registerUser,
   logoutUser,
   getUserProfile,
   updateUserProfile,
-  getUser
+  getUser,
+  getAllUsers
 };

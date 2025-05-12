@@ -48,7 +48,7 @@ const AllPostsScreen = () => {
 
 
   return (
-    <div ref={scrollTopRef} className='flex flex-col items-center justify-center gap-8 mx-32 py-8 min-h-180 '>
+    <div ref={scrollTopRef} className='flex flex-col items-center justify-center gap-8 mx-32 py-8 min-h-180 scroll-m-16'>
       <h1  className="text-3xl">All Posts</h1>
       <div className="flex w-full items-center gap-8">
         <div className="flex items-center gap-2">

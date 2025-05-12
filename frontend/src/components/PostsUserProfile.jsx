@@ -17,7 +17,7 @@ const PostsProfile = ({userId, scrollTop}) => {
   const [displayedPosts, setDisplayedPosts] = useState([]);
   const [page, setPage] = useState(1);
   const [numPerPage, setNumPerPage] = useState(3);
-  const [sort, setSort] = useState('asc');
+  const [sort, setSort] = useState('desc');
   const [totalPage, setTotalPage] = useState();
 
   const [getUserPostsApiCall] = useGetUserPostsMutation();
@@ -70,8 +70,8 @@ const PostsProfile = ({userId, scrollTop}) => {
           <select name="sort" id="sort" value={sort} onChange={(e) => {
             setSort(e.target.value)
           }} className='cursor-pointer'>
-            <option value='asc' >oldest</option>
             <option value='desc' >newest</option>
+            <option value='asc' >oldest</option>
           </select>
         </div>
         
