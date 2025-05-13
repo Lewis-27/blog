@@ -16,7 +16,8 @@ const authUser = asyncHandler(async (req, res) => {
     res.status(201).json({
       _id: user.id,
       name: user.name,
-      email: user.email
+      email: user.email,
+      colour: user.colour
     })
   } else {
     res.status(401);
@@ -28,7 +29,7 @@ const authUser = asyncHandler(async (req, res) => {
 // router       POST /api/users
 // @ access     Public
 const registerUser = asyncHandler(async (req, res) => {
-  const {name, email, password} = req.body;
+  const {name, email, password, colour} = req.body;
   const userExists = await User.findOne({email})
 
   if(userExists){
@@ -39,7 +40,8 @@ const registerUser = asyncHandler(async (req, res) => {
   const user = await User.create({
     name,
     email,
-    password
+    password,
+    colour
   })
 
   if(user) {
@@ -47,7 +49,8 @@ const registerUser = asyncHandler(async (req, res) => {
     res.status(201).json({
       _id: user.id,
       name: user.name,
-      email: user.email
+      email: user.email,
+      colour: user.colour
     })
   } else {
     res.status(400);
@@ -76,7 +79,8 @@ const getUserProfile = asyncHandler(async (req, res) => {
   const user = {
     _id: req.user._id,
     name: req.user.name,
-    email: req.user.email
+    email: req.user.email,
+    colour: req.user.colour
   }
 
   res.status(200).json({
@@ -92,6 +96,7 @@ const updateUserProfile = asyncHandler(async (req, res) => {
   if(user) {
     user.name = req.body.name || user.name;
     user.email = req.body.email || user.email;
+    user.colour = req.body.colour || user.colour;
     if(req.body.password) {
       user.password = req.body.password
     }
@@ -99,7 +104,8 @@ const updateUserProfile = asyncHandler(async (req, res) => {
     res.status(200).json({
       _id: updatedUser._id,
       name: updatedUser.name,
-      email: updatedUser.email
+      email: updatedUser.email,
+      colour: updatedUser.colour
     })
   } else {
     res.status(404);
@@ -114,7 +120,8 @@ const getUser = asyncHandler(async (req, res) => {
   const user = await User.findById(req.params.id);
   if(user){
     res.status(200).json({
-      name: user.name
+      name: user.name,
+      colour: user.colour
     })
   } else {
     res.status(404);

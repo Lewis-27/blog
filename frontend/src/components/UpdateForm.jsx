@@ -1,7 +1,7 @@
 import React from 'react'
 import { useState, useEffect } from 'react'
 import { Link, useNavigate } from 'react-router-dom'
-import {FaEye, FaEyeSlash} from 'react-icons/fa'
+import {FaEye, FaEyeSlash, FaCheck} from 'react-icons/fa'
 
 import { useDispatch, useSelector } from 'react-redux'
 import { useUpdateUserMutation } from '../slices/usersApiSlice'
@@ -16,6 +16,7 @@ const UpdateForm = ({setEditing}) => {
   const [email, setEmail] = useState(userInfo.email);
   const [password, setPassword] = useState('');
   const [isVisible, setIsVisible] = useState(false);
+  const [colour, setColour] = useState(userInfo.colour);
 
   const [updateUserApiCall] = useUpdateUserMutation();
   const dispatch = useDispatch();
@@ -35,15 +36,16 @@ const UpdateForm = ({setEditing}) => {
       user = {
       name,
       email,
+      colour
       }
     } else {
       user = {
         name,
         email,
+        colour,
         password
       }
     } 
-    
 
     try {
       const res = await updateUserApiCall(user).unwrap();
@@ -57,14 +59,15 @@ const UpdateForm = ({setEditing}) => {
     }
   }
 
+  
+
   return (
-      <div className=' w-1/2 flex flex-col items-center justify-center gap-6 '>
-        
+      <div className='flex flex-col items-center justify-center gap-6 '>
         
         <form 
           action="submit"
           onSubmit={submitHandler}
-          className='flex flex-col items-center w-1/2 gap-2 min-w-64'
+          className='flex flex-col items-center gap-2 min-w-64'
         >
           <input 
             type="text" 
@@ -99,6 +102,36 @@ const UpdateForm = ({setEditing}) => {
                 className='absolute text-2xl text-gray-700 mt-2 -ml-10 cursor-pointer'
                 onClick={() => {setIsVisible(!isVisible)}}
               >{isVisible ? <FaEyeSlash /> : <FaEye />}</button>
+            </div>
+
+            <div className="self-start flex flex-col gap-2 w-full ">
+              <p className=''>Select colour:</p>
+              <div className="flex flex-wrap gap-4 w-full items-center justify-between">
+                <div className={`cursor-pointer aspect-square h-8 bg-blue-300 rounded-full flex items-center justify-center ${colour === 'blue' ? 'border border-gray-700' : ''}`}
+                  onClick={() => setColour('blue')}>
+                  {colour === 'blue' ? <FaCheck className='text-gray-700'/> : <></>}
+                </div>
+                <div className={`cursor-pointer aspect-square h-8 bg-red-400 rounded-full flex items-center justify-center ${colour === 'red' ? 'border border-gray-700' : ''}`}
+                onClick={() => setColour('red')}>
+                  {colour === 'red' ? <FaCheck className='text-gray-700'/> : <></>}
+                </div>
+                <div className={`cursor-pointer aspect-square h-8 bg-green-300 rounded-full flex items-center justify-center ${colour === 'green' ? 'border border-gray-700' : ''}`}
+                onClick={() => setColour('green')}>
+                  {colour === 'green' ? <FaCheck className='text-gray-700'/> : <></>}
+                </div>
+                <div className={`cursor-pointer aspect-square h-8 bg-yellow-400 rounded-full flex items-center justify-center ${colour === 'yellow' ? 'border border-gray-700' : ''}`}
+                onClick={() => setColour('yellow')}>
+                  {colour === 'yellow' ? <FaCheck className='text-gray-700'/> : <></>}
+                </div>
+                <div className={`cursor-pointer aspect-square h-8 bg-purple-300 rounded-full flex items-center justify-center ${colour === 'purple' ? 'border border-gray-700' : ''}`}
+                onClick={() => setColour('purple')}>
+                  {colour === 'purple' ? <FaCheck className='text-gray-700'/> : <></>}
+                </div>
+                <div className={`cursor-pointer aspect-square h-8 bg-orange-400 rounded-full flex items-center justify-center ${colour === 'orange' ? 'border border-gray-700' : ''}`}
+                onClick={() => setColour('orange')}>
+                  {colour === 'orange' ? <FaCheck className='text-gray-700'/> : <></>}
+                </div>
+              </div>            
             </div>
             
             <button 

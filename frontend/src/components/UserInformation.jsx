@@ -26,35 +26,6 @@ const UserInformation = () => {
       }
     }, [navigate, userInfo])
 
-  // const submitHandler = async (e) => {
-  //   e.preventDefault();
-  //   let user;
-
-  //   if(password === ''){
-  //     user = {
-  //     name,
-  //     email,
-  //     }
-  //   } else {
-  //     user = {
-  //       name,
-  //       email,
-  //       password
-  //     }
-  //   } 
-    
-
-  //   try {
-  //     const res = await updateUserApiCall(user).unwrap();
-  //     dispatch(setCredentials({...res}))
-  //     toast.success('Profile updated')
-  //     navigate('/profile')
-  //   } catch (err) {
-  //     toast.error('Something went wrong updating your profile')
-  //     console.log(err)
-  //   }
-  // }
-
   return (
       <div className=' w-full flex flex-col items-center justify-start gap-6 '>
         <div className="flex gap-4 w-80 rounded-full py-2 px-6 border">

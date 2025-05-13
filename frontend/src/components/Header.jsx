@@ -8,6 +8,8 @@ import { useState } from 'react'
 import { useLogoutMutation } from '../slices/usersApiSlice'
 import { logout } from '../slices/authSlice'
 
+import UserIconSmall from './UserIconSmall'
+
 const Header = () => {
   const {userInfo} = useSelector((state) => state.auth);
   const [dropdown, setDropdown] = useState(false);
@@ -33,11 +35,12 @@ const Header = () => {
       {userInfo
         ? <div className='relative'>
           <button type="button" onClick={() => {setDropdown(!dropdown)}} className='cursor-pointer flex items-center gap-1 text-sm'>
+            <UserIconSmall userColour={userInfo.colour}/>
             <h1 className='text-xl'>{userInfo.name}</h1>
             <FaChevronDown className='' />
           </button>
           {dropdown 
-            ? <div className='absolute bg-gray-200 px-2 py-2 w-28 top-8 right-0 rounded-lg shadow-lg flex flex-col gap-1 border border-gray-300'>
+            ? <div className='absolute bg-gray-200 px-2 py-2 w-28 top-8 right-0 rounded-lg shadow-lg flex flex-col gap-1 border border-gray-300 z-50'>
               <Link to='/profile' onClick={() => setDropdown(false)}>Profile</Link>
               <hr className='text-gray-400'/>
               <Link to='/newPost' onClick={() => setDropdown(false)}>New post</Link>

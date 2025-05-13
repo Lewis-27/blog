@@ -1,12 +1,16 @@
 import React from 'react'
 import { useState, useEffect } from 'react'
 import { Link } from 'react-router-dom'
+import { useSelector } from 'react-redux'
+
+import UserIconSmall from './UserIconSmall'
 
 import { useGetUserMutation } from '../slices/usersApiSlice'
 
-const PostExtraSmall = ({postData}) => {
+const PostExtraSmall = ({postData, edited}) => {
   const {_id, title, body, tags, userId} = {...postData}
   const [author, setAuthor] = useState('');
+  const [userColour, setUserColour] = useState('');
 
   const [getUserApiCall] = useGetUserMutation(userId);
 
@@ -15,12 +19,35 @@ const PostExtraSmall = ({postData}) => {
       try {
         const res = await getUserApiCall(userId).unwrap();
         setAuthor(res.name);
+        setUserColour(res.colour);
       } catch (error) {
         console.log(error)
       }
     }
     getAuthor()
   }, [])
+
+  useEffect(() => {
+    const getUserColour = async () => {
+      try {
+        const res = await getUserApiCall(userId).unwrap();
+        setUserColour(res.colour)
+      } catch (error) {
+        console.log(error)
+      }
+    }
+    getUserColour()
+    const getAuthor = async () => {
+      try {
+        const res = await getUserApiCall(userId).unwrap();
+        setAuthor(res.name);
+        setUserColour(res.colour);
+      } catch (error) {
+        console.log(error)
+      }
+    }
+    getAuthor()
+  }, [edited])
 
   
 
@@ -30,7 +57,10 @@ const PostExtraSmall = ({postData}) => {
         <h1 className=' '>{title}</h1>
         <div className="flex gap-1 items-center">
           <h2 className="">- by</h2>
-          <Link to={`/users/${userId}`} className="hover:text-blue-500">{author}</Link>
+          <Link to={`/users/${userId}`} className="hover:text-blue-500 flex items-center gap-1">
+            <UserIconSmall userColour={userColour} /> 
+            {author}
+          </Link>
         </div>
       </div>
       <hr className='w-full text-gray-400 my-2'/>

@@ -7,6 +7,8 @@ import { useDeletePostMutation } from '../slices/postsApiSlice'
 import { useNavigate } from 'react-router-dom'
 import { toast } from 'react-toastify'
 
+import UserIconSmall from './UserIconSmall'
+
 
 const PostLarge = ({postData}) => {
   const currentUserId = useSelector((state) => state.auth.userInfo._id);
@@ -14,6 +16,7 @@ const PostLarge = ({postData}) => {
   const {_id, title, body, tags, userId} = postData
 
   const [author, setAuthor] = useState('')
+  const [userColour, setUserColour] = useState('');
   const [postOwner, setPostOwner] = useState(false);
 
 
@@ -25,6 +28,7 @@ const PostLarge = ({postData}) => {
         try {
           const res = await getUserApiCall(userId).unwrap();
           setAuthor(res.name);
+          setUserColour(res.colour);
         } catch (error) {
           console.log(error)
         }
@@ -68,7 +72,10 @@ const PostLarge = ({postData}) => {
         <h1 className=' '>{title}</h1>
         <div className="flex gap-1 items-center">
           <h2 className="">- by</h2>
-          <Link to={`/users/${userId}`} className="hover:text-blue-500">{author}</Link>
+          <Link to={`/users/${userId}`} className="hover:text-blue-500 flex items-center gap-1">
+            <UserIconSmall userColour={userColour} /> 
+            {author}
+          </Link>
         </div>
       </div>
       <hr className='w-full text-gray-400 my-2'/>
