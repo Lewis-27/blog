@@ -18,17 +18,25 @@ const CreatePostForm = () => {
   const [newTag, setNewTag] = useState('');
   const [tags, setTags] = useState([]);
 
+  const [editingError, setEditingError] = useState('');
+
   const addTag = () => {
-    
-    const newTags = tags;
-    if(newTag){
-      newTags.push(newTag);
-      setTags(newTags);
-      setNewTag('')
-    } else {
-      toast.error('Please type a tag')
+      let newTags = tags;
+      if(newTag && !editingError){
+        if(tags.includes(newTag)){
+          toast.error('Cannot repeat tag')
+        } else {
+          newTags = [...newTags, newTag];
+          setTags(newTags.sort());
+          setNewTag('')
+        }
+        
+      } else if (editingError){
+        toast.error(`${editingError}`)
+      }else{
+        toast.error('Please type a tag')
+      }
     }
-  }
 
   const removeTag = (tagIndex) => {
     const newTags = tags.filter((tag) => tags.indexOf(tag) !== tagIndex);
@@ -77,28 +85,58 @@ const CreatePostForm = () => {
           placeholder='Post body'
           required
           className='w-full border border-gray-500 rounded-lg min-h-80 p-4' />
+        
         <div className="flex items-center gap-2 w-full px-1 py-2 rounded-lg border border-gray-500 relative">
-          <h2>Tags:</h2>
-          <input 
-            type="text" 
-            placeholder='tag' 
-            value={newTag} 
-            onChange={(e) => setNewTag(e.target.value)}
-            className='border border-gray-500 px-4 py-2 rounded-lg'/> 
-          <button type="button" className='cursor-pointer relative right-10' onClick={addTag}><FaPlus /></button>
-          {tags ? 
-            tags.map((tag) => {
-              return <div key={tags.indexOf(tag)} className='relative flex gap-1 rounded-lg outline-dashed outline outline-gray-400 px-2 py-1'>
-                <div  className=" ">{tag}</div>
-                <button type="button" className='cursor-pointer relative text-sm text-red-500' onClick={(e) => {
-                  removeTag(tags.indexOf(tag))
-                }}><FaX /></button>
+                  <h2 className='self-start py-4 pl-2'>Tags:</h2>
+                  <div className="flex items-center gap-2 flex-wrap p-2 min-h-14">
+                  <div className={`relative rounded-lg border flex items-center gap-1 ${editingError !== '' ? 'border-red-500 focus:outline-red-500  ' : ' border-gray-500 '}`}>
+                    
+                    <input 
+                      type="text" 
+                      placeholder='tag' 
+                      id='newTag'
+                      value={newTag} 
+                      onChange={(e) => {
+                        if(e.target.value.length >= 30) {
+                          setEditingError('Tag too long')
+                        } else {
+                          setEditingError('')
+                          setNewTag(e.target.value)
+                        }
+                      }}
+                      onKeyDown={(e) => {
+                        if(e.key === 'Enter') {
+                          e.preventDefault()
+                          e.preventDefault()
+                          addTag()
+                        }
+                      }}
+                      className={` px-2 py-2 pr-10 ${editingError !== '' ? 'border-red-500 focus:outline-red-500  ' : ' border-gray-500 '}`}/> 
+                      
+                    <button type="button" id='addTagBtn' className={`cursor-pointer px-3 right-0 absolute ${editingError? 'text-gray-300' : ''}`} onClick={addTag}><FaPlus /></button>
+                  </div>
+                  
+                    {tags 
+                      ? tags.map((tag) => {
+                        return <div key={tag} className='relative flex gap-1 rounded-lg outline-dashed outline outline-gray-400 px-2 py-1 '>
+                          <div  className="max-h-10 text-nowrap">{tag}</div>
+                          <button type="button" className='cursor-pointer relative text-sm text-red-500' onClick={(e) => {
+                            removeTag(tags.indexOf(tag))
+                          }}><FaX /></button>
+                          </div>
+                      })
+                      
+                      : <></>
+                    }
+                  </div>
+                  
+                   {editingError !== '' ? <div className='absolute top-16 left-14 text-red-500'>Tag too long!</div> : <></>}
+                  
+                  
                 </div>
-            })
-           : <></>}
-          
-          
-        </div>
+                  
+                  
+              
         <button type="submit" className='bg-blue-500 text-white px-4 py-2 rounded-lg w-32 self-end cursor-pointer hover:bg-blue-700 transition duration-300'>Post</button>
       </form>
   )

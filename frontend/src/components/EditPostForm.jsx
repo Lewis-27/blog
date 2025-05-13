@@ -54,13 +54,16 @@ const EditPostForm = () => {
 
 
   const addTag = () => {
-    
     let newTags = tags;
-    console.log(newTags)
     if(newTag && !editingError){
-      newTags = [...newTags, newTag];
-      setTags(newTags);
-      setNewTag('')
+      if(tags.includes(newTag)){
+        toast.error('Cannot repeat tag')
+      } else {
+        newTags = [...newTags, newTag];
+        setTags(newTags.sort());
+        setNewTag('')
+      }
+      
     } else if (editingError){
       toast.error(`${editingError}`)
     }else{
@@ -93,6 +96,7 @@ const EditPostForm = () => {
       toast.error('Error editing post')
     }
   }
+
   return (
     <form action="" onSubmit={submitHandler} className='flex flex-col items-center justify-center gap-2 px-32 w-full text-lg'>
         <div className="flex items-center justify-center gap-1 w-full ">
@@ -117,11 +121,14 @@ const EditPostForm = () => {
           required
           className={`w-full border border-gray-500 rounded-lg min-h-80 p-4 h-[${textAreaHeight}px] `} />
         <div className="flex items-center gap-2 w-full px-1 py-2 rounded-lg border border-gray-500 relative">
-          <h2>Tags:</h2>
+          <h2 className='self-start py-4 pl-2'>Tags:</h2>
+          <div className="flex items-center gap-2 flex-wrap p-2 min-h-14">
           <div className={`relative rounded-lg border flex items-center gap-1 ${editingError !== '' ? 'border-red-500 focus:outline-red-500  ' : ' border-gray-500 '}`}>
+            
             <input 
               type="text" 
               placeholder='tag' 
+              id='newTag'
               value={newTag} 
               onChange={(e) => {
                 if(e.target.value.length >= 30) {
@@ -131,14 +138,21 @@ const EditPostForm = () => {
                   setNewTag(e.target.value)
                 }
               }}
+              onKeyDown={(e) => {
+                if(e.key === 'Enter') {
+                  e.preventDefault()
+                  e.preventDefault()
+                  addTag()
+                }
+              }}
               className={` px-2 py-2 pr-10 ${editingError !== '' ? 'border-red-500 focus:outline-red-500  ' : ' border-gray-500 '}`}/> 
               
-            <button type="button" className={`cursor-pointer px-3 right-0 absolute ${editingError? 'text-gray-300' : ''}`} onClick={addTag}><FaPlus /></button>
+            <button type="button" id='addTagBtn' className={`cursor-pointer px-3 right-0 absolute ${editingError? 'text-gray-300' : ''}`} onClick={addTag}><FaPlus /></button>
           </div>
-          <div className="flex items-center gap-2 overflow-scroll p-2 min-h-14">
+          
             {tags 
               ? tags.map((tag) => {
-                return <div key={tags.indexOf(tag)} className='relative flex gap-1 rounded-lg outline-dashed outline outline-gray-400 px-2 py-1 '>
+                return <div key={tag} className='relative flex gap-1 rounded-lg outline-dashed outline outline-gray-400 px-2 py-1 '>
                   <div  className="max-h-10 text-nowrap">{tag}</div>
                   <button type="button" className='cursor-pointer relative text-sm text-red-500' onClick={(e) => {
                     removeTag(tags.indexOf(tag))

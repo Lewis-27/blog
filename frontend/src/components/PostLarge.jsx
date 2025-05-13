@@ -83,15 +83,15 @@ const PostLarge = ({postData}) => {
       <hr className='w-full text-gray-400 my-4'/>
       <div className="flex w-full items-center justify-between gap-2">
 
+          <div className='flex items-center gap-2 flex-wrap p-2 min-h-14 grow'>
           <h3>Tags: </h3>
-          <div className='flex items-center gap-2 overflow-x-scroll p-2 min-h-14 grow'>
             {tags.map((tag) => {
               return <div className="text-lg rounded-lg outline-dashed outline outline-gray-400 px-2 py-1 text-nowrap">{tag}</div>
             })}
         </div>
           
           
-        {postOwner ? <div className="flex items-center gap-4 text-nowrap">
+        {postOwner ? <div className="flex items-center gap-4 text-nowrap self-start">
           <Link to={`/posts/${_id}/edit`} className='px-4 py-2 bg-blue-500 text-white rounded-md hover:bg-blue-700 transition duration-300'>Edit Post</Link>
           <button type="button" onClick={deleteHandler} className='bg-red-500 text-white px-4 py-2 rounded-lg  cursor-pointer hover:bg-red-700 transition duration-300'>Delete Post</button>
         </div> : <></>}

@@ -65,13 +65,13 @@ const PostExtraSmall = ({postData, edited}) => {
       </div>
       <hr className='w-full text-gray-400 my-2'/>
       <div className="flex w-full items-center gap-2">
+          <div className="flex items-center gap-2 flex-wrap p-2 min-h-14 grow">
           <h3>Tags: </h3>
-          <div className="flex items-center gap-2 overflow-x-scroll p-2 min-h-14 grow">
             {tags.map((tag) => {
               return <div key={tags.indexOf(tag)} className="text-lg rounded-lg outline-dashed outline outline-gray-400 px-2 py-1 max-h-10 text-nowrap">{tag}</div>
             })}
           </div>
-        <Link to={`/posts/${_id}`} className='px-4 py-2 bg-blue-500 text-white rounded-md text-nowrap'>View Post</Link>
+        <Link to={`/posts/${_id}`} className='px-4 py-2 bg-blue-500 text-white rounded-md text-nowrap self-start mt-1'>View Post</Link>
       </div>
       
 
