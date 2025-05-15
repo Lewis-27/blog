@@ -27,7 +27,7 @@ const UserInformation = () => {
     }, [navigate, userInfo])
 
   return (
-      <div className=' w-full flex flex-col items-center justify-start gap-6 '>
+      <div className=' w-full flex flex-col items-center justify-start gap-6'>
         <div className="flex gap-4 w-80 rounded-full py-2 px-6 border">
           <h1>Name: </h1>
           <h1>{name}</h1>

@@ -41,7 +41,7 @@ const PostsProfile = (editing) => {
 
   return (
     <>
-      <div className='w-full flex flex-col gap-8 h-128 justify-center items-center' >
+      <div className='w-full flex flex-col gap-8 min-h-128 justify-center items-center' >
         {posts.length === 0 ? <></> : <h1 className='text-3xl mb-4'>Your posts:</h1>}
         {isLoading ? <h1>Loading</h1> : posts.map((post) => <PostExtraSmall key={post._id} postData={post} edited={editing} />)}
         {(!isLoading && posts.length === 0) ? <div className="text-center">

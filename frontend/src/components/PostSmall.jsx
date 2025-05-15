@@ -58,9 +58,9 @@ const PostSmall = ({postData}) => {
 
 
   return (
-    <div className='border border-gray-400 shadow-lg w-full flex flex-col items-start justify-around py-4 px-4 rounded-lg'>
+    <div className='border border-gray-400 shadow-lg w-full flex flex-col items-start justify-around pt-4 pb-2 px-4 rounded-lg'>
       <div className="flex gap-2 items-center">
-        <h1 className=' '>{title}</h1>
+        <Link to={`/posts/${_id}`} className='hover:text-blue-500 transition duration-300'>{title}</Link>
         <div className="flex gap-1 items-center">
           <h2 className="">- by</h2>
           <Link to={`/users/${userId}`} className="hover:text-blue-500 flex items-center gap-1">
@@ -71,23 +71,24 @@ const PostSmall = ({postData}) => {
         </div>
       </div>
       <hr className='w-full text-gray-400 my-2'/>
-      <div id={`postBody_${_id}`} className="items-center min-h-20 max-h-44 overflow-clip w-full">
+      <div id={`postBody_${_id}`} className="items-center min-h-10 lg:min-h-20 max-h-44 overflow-clip w-full">
         <p  className=" whitespace-pre-wrap w-full ">{body}</p>
       </div>
       {overflow ? <Link to={`/posts/${_id}`} className='text-blue-500 hover:text-blue-700'>View full post</Link> : <></>}
-      <hr className='w-full text-gray-400 my-4'/>
+      <hr className='w-full text-gray-400 my-2'/>
 
       <div className="flex w-full items-center gap-2">
           <div className="flex items-center gap-2 flex-wrap p-2 min-h-14 grow">
-          <h3>Tags: </h3>
+            <h3>Tags: </h3>
             {tags.map((tag) => {
                 return <div key={tags.indexOf(tag)} className="text-lg rounded-lg outline-dashed outline outline-gray-400 px-2 py-1 max-h-10 text-nowrap">{tag}</div>
               })}  
           </div>
           
-          <Link to={`/posts/${_id}`} className='px-4 py-2 bg-blue-500 text-white rounded-md text-nowrap self-start mt-1'>View Post</Link>
 
       </div>
+      <hr className='w-full text-gray-400 my-2'/>
+      <Link to={`/posts/${_id}`} className='px-4 py-2 bg-blue-500 text-white rounded-md text-nowrap self-end'>View Post</Link>
       
 
     </div>

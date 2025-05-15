@@ -55,7 +55,7 @@ const SignInForm = () => {
     <div className='h-180 w-1/2 m-auto flex flex-col items-center justify-center gap-6'>
       <div className="flex flex-col items-center justify-center gap-1">
         <h1 className="text-4xl">Welcome back!</h1>
-        <p className="text-xl text-gray-500">Sign in and get back to posting!</p>
+        <p className="text-xl text-gray-500 text-center">Sign in and get back to posting!</p>
       </div>
       
       <form 

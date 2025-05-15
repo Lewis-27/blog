@@ -18,7 +18,7 @@ const CreatePostScreen = () => {
   
 
   return (
-    <div className='w-full h-180 flex flex-col items-center justify-center gap-4'>
+    <div className='w-full min-h-180 flex flex-col items-center justify-center gap-4'>
       <h1 className='text-4xl'>Create new post</h1>
       
       {userInfo ? <CreatePostForm /> : <></>}

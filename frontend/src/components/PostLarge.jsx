@@ -11,7 +11,13 @@ import UserIconSmall from './UserIconSmall'
 
 
 const PostLarge = ({postData}) => {
-  const currentUserId = useSelector((state) => state.auth.userInfo._id);
+  const userInfo = useSelector((state) => state.auth.userInfo)
+  let currentUserId;
+  if(userInfo) {
+    currentUserId = userInfo._id
+  } else {
+    currentUserId = null
+  }
   const navigate = useNavigate();
   const {_id, title, body, tags, userId} = postData
 
@@ -69,7 +75,7 @@ const PostLarge = ({postData}) => {
   return (
     <div className='border border-gray-400 shadow-lg w-full mx-4 lg:w-2/3 lg:mx-0 h-full flex flex-col items-start justify-around py-4 px-4 rounded-lg text-lg'>
       <div className="flex gap-2 items-center">
-        <h1 className=' '>{title}</h1>
+        <Link to={`/posts/${_id}`} className='hover:text-blue-500 transition duration-300'>{title}</Link>
         <div className="flex gap-1 items-center">
           <h2 className="">- by</h2>
           <Link to={`/users/${userId}`} className="hover:text-blue-500 flex items-center gap-1">
@@ -80,7 +86,7 @@ const PostLarge = ({postData}) => {
       </div>
       <hr className='w-full text-gray-400 my-2'/>
       <p className="min-h-20 flex-grow whitespace-pre-wrap">{body}</p>
-      <hr className='w-full text-gray-400 my-4'/>
+      <hr className='w-full text-gray-400 my-2'/>
       <div className="flex w-full items-center justify-between gap-2">
 
           <div className='flex items-center gap-2 flex-wrap p-2 min-h-14 grow'>
@@ -91,12 +97,13 @@ const PostLarge = ({postData}) => {
         </div>
           
           
-        {postOwner ? <div className="flex items-center gap-4 text-nowrap self-start">
-          <Link to={`/posts/${_id}/edit`} className='px-4 py-2 bg-blue-500 text-white rounded-md hover:bg-blue-700 transition duration-300'>Edit Post</Link>
-          <button type="button" onClick={deleteHandler} className='bg-red-500 text-white px-4 py-2 rounded-lg  cursor-pointer hover:bg-red-700 transition duration-300'>Delete Post</button>
-        </div> : <></>}
         
       </div>
+      {postOwner ? <div className="flex items-center gap-4 text-nowrap self-end">
+        <hr className='w-full text-gray-400 my-2'/>
+        <Link to={`/posts/${_id}/edit`} className='px-4 py-2 bg-blue-500 text-white rounded-md hover:bg-blue-700 transition duration-300'>Edit Post</Link>
+        <button type="button" onClick={deleteHandler} className='bg-red-500 text-white px-4 py-2 rounded-lg  cursor-pointer hover:bg-red-700 transition duration-300'>Delete Post</button>
+      </div> : <></>}
       
 
     </div>

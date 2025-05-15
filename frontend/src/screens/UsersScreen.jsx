@@ -24,7 +24,7 @@ const UsersScreen = () => {
   }, [])
 
   return (
-    <div className='min-h-180 px-80 flex flex-col gap-8'>
+    <div className='min-h-180 px-4 m-auto flex flex-col gap-8 max-w-140'>
       <h1 className='text-3xl'>All users</h1>
       {isLoading 
         ? <h1>Loading</h1> 

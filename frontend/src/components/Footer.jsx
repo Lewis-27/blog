@@ -5,7 +5,7 @@ import { FaRegCopyright } from 'react-icons/fa6'
 const Footer = () => {
   return (
     <div className='w-full h-64 bg-blue-200 flex items-center justify-center absolute'>
-      <div className="flex justify-evenly items-start w-2/3 ">
+      <div className="flex justify-evenly items-start w-full lg:w-2/3 ">
         <div className="flex flex-col items-center justify-evenly ">
         <Link className='text-3xl w-full text-center' to={'/'}>Blog</Link>
         <div className="flex gap-1 items-center text-gray-600">

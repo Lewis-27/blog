@@ -28,8 +28,8 @@ const WelcomeBanner = () => {
   }, [])
 
   return (
-    <div className='w-full flex flex-col lg:flex-row items-center justify-evenly h-128 text-xl'>
-      <div className="flex flex-col gap-4 items-center justify-center">
+    <div className='w-full flex flex-col lg:flex-row items-center justify-evenly min-h-128 text-xl'>
+      <div className="flex flex-col gap-4 items-center justify-center min-h-100">
         <h1 className="text-3xl">Welcome {userInfo.name}</h1>
         <p className="">Ready to share your ideas?</p>
         <Link to='/newPost' className='bg-blue-500 text-white py-2 px-8 rounded-lg hover:bg-blue-700 transition duration-200'>

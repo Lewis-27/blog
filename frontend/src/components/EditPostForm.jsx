@@ -98,7 +98,7 @@ const EditPostForm = () => {
   }
 
   return (
-    <form action="" onSubmit={submitHandler} className='flex flex-col items-center justify-center gap-2 px-32 w-full text-lg'>
+    <form action="" onSubmit={submitHandler} className='flex flex-col items-center justify-center gap-2 px-4 lg:px-32 w-full text-lg'>
         <div className="flex items-center justify-center gap-1 w-full ">
           <input 
           type="text"
@@ -120,8 +120,8 @@ const EditPostForm = () => {
           placeholder='Post body'
           required
           className={`w-full border border-gray-500 rounded-lg min-h-80 p-4 h-[${textAreaHeight}px] `} />
-        <div className="flex items-center gap-2 w-full px-1 py-2 rounded-lg border border-gray-500 relative">
-          <h2 className='self-start py-4 pl-2'>Tags:</h2>
+        <div className="flex flex-col md:flex-row items-center md:gap-2 w-full px-1 py-2 rounded-lg border border-gray-500 relative">
+          <h2 className='self-start md:py-4 pl-2'>Tags:</h2>
           <div className="flex items-center gap-2 flex-wrap p-2 min-h-14">
           <div className={`relative rounded-lg border flex items-center gap-1 ${editingError !== '' ? 'border-red-500 focus:outline-red-500  ' : ' border-gray-500 '}`}>
             

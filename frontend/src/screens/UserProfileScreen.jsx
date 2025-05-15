@@ -42,7 +42,7 @@ const UserProfileScreen = () => {
   }, [navigate])
 
   return (
-    <div ref={scrollTopRef} className='mb-2 min-h-140 flex flex-col items-center justify-center gap-4 mx-28 scroll-m-16 '>
+    <div ref={scrollTopRef} className='mb-2 min-h-140 flex flex-col items-center justify-center gap-4 mx-6 lg:mx-28 scroll-m-16 '>
       <UserBanner userColour={colour}/>
       <h1 className='text-2xl self-start'>Posts by {name}:</h1>
       <PostsUserProfile userId={userId} scrollTop={scrollTop} className=''/>
