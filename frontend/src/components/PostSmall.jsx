@@ -59,9 +59,9 @@ const PostSmall = ({postData}) => {
 
   return (
     <div className='border border-gray-400 shadow-lg w-full flex flex-col items-start justify-around pt-4 pb-2 px-4 rounded-lg'>
-      <div className="flex gap-2 items-center">
+      <div className="flex gap-2 items-center ">
         <Link to={`/posts/${_id}`} className='hover:text-blue-500 transition duration-300'>{title}</Link>
-        <div className="flex gap-1 items-center">
+        <div className="flex flex-wrap gap-1 items-center self-start min-w-32">
           <h2 className="">- by</h2>
           <Link to={`/users/${userId}`} className="hover:text-blue-500 flex items-center gap-1">
             <UserIconSmall userColour={userColour} /> 
@@ -71,7 +71,7 @@ const PostSmall = ({postData}) => {
         </div>
       </div>
       <hr className='w-full text-gray-400 my-2'/>
-      <div id={`postBody_${_id}`} className="items-center min-h-10 lg:min-h-20 max-h-44 overflow-clip w-full">
+      <div id={`postBody_${_id}`} className="items-center min-h-10 lg:min-h-20 max-h-42 overflow-clip w-full">
         <p  className=" whitespace-pre-wrap w-full ">{body}</p>
       </div>
       {overflow ? <Link to={`/posts/${_id}`} className='text-blue-500 hover:text-blue-700'>View full post</Link> : <></>}

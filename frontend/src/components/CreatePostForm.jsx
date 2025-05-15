@@ -13,10 +13,13 @@ const CreatePostForm = () => {
 
   const navigate = useNavigate();
 
+  const MAX_CHAR = 200
+
   const [title, setTitle] = useState('');
   const [body, setBody] = useState('');
   const [newTag, setNewTag] = useState('');
   const [tags, setTags] = useState([]);
+  const [charRemaining, setCharRemaining] = useState(MAX_CHAR);
 
   const [editingError, setEditingError] = useState('');
 
@@ -62,6 +65,10 @@ const CreatePostForm = () => {
       toast.error('Error creating post')
     }
   }
+
+  useEffect(() => {
+    setCharRemaining(MAX_CHAR - title.length)
+  }, [title])
   return (
     <form action="" onSubmit={submitHandler} className='flex flex-col items-center justify-center gap-2 px-4 lg:px-32 w-full text-lg'>
         <div className="flex items-center justify-center gap-1 w-full ">
@@ -70,13 +77,17 @@ const CreatePostForm = () => {
           name='title'
           id='title'
           value={title}
-          onChange={(e) => setTitle(e.target.value)}
+          onChange={(e) => {
+            setTitle(e.target.value)
+          }}
           placeholder='Title'
+          maxLength={MAX_CHAR}
           required
           className='px-4 py-2 border border-gray-500 rounded-lg grow'
         />
         <h1>- by {userInfo.name}</h1>
         </div>
+        <div className={`font-light text-base self-start mx-4 ${charRemaining === 0 ? 'text-red-500' : 'text-gray-500'}`}>Characters left: {charRemaining}</div>
         <textarea 
           name="body" 
           id="body" 
@@ -86,11 +97,11 @@ const CreatePostForm = () => {
           required
           className='w-full border border-gray-500 rounded-lg min-h-80 p-4' />
         
-        <div className="flex flex-col md:flex-row  items-center md;gap-2 w-full px-1 py-2 rounded-lg border border-gray-500 relative">
+        <div className={`flex flex-col md:flex-row  items-center md;gap-2 w-full px-1 ${editingError? 'pt-5 pb-2' : 'py-2'} rounded-lg border border-gray-500 relative`}>
                   <h2 className='self-start pt-2 md:py-4 pl-2'>Tags:</h2>
                   <div className="flex items-center gap-2 flex-wrap p-2 min-h-14">
                   <div className={`relative rounded-lg border flex items-center gap-1 ${editingError !== '' ? 'border-red-500 focus:outline-red-500  ' : ' border-gray-500 '}`}>
-                    
+                  {editingError !== '' ? <div className='absolute bottom-11 text-red-500'>Tag too long!</div> : <></>}
                     <input 
                       type="text" 
                       placeholder='tag' 
@@ -130,7 +141,7 @@ const CreatePostForm = () => {
                     }
                   </div>
                   
-                   {editingError !== '' ? <div className='absolute top-16 left-14 text-red-500'>Tag too long!</div> : <></>}
+                  
                   
                   
                 </div>

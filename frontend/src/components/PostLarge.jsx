@@ -59,18 +59,7 @@ const PostLarge = ({postData}) => {
         
       }
     }
-      
-    //   try {
-    //     if(confirm('Are you sure you want to delete this post?')){
-    //       const res = await deletePostApiCall(_id)
-    //       toast.success('Post deleted')
-    //     }
-    //   } catch (error) {
-    //     console.log(error)
-    //     toast.error('Error deleting post')
-    //   }
-      
-    // }
+    
 
   return (
     <div className='border border-gray-400 shadow-lg w-full mx-4 lg:w-2/3 lg:mx-0 h-full flex flex-col items-start justify-around py-4 px-4 rounded-lg text-lg'>
