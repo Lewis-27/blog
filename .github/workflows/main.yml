@@ -54,8 +54,9 @@ jobs:
         with:
           # Upload dist folder
           path: './frontend/dist'
-      - name: test
+      - name: test 1
         run: echo ${{ secets.NODE_ENV }} 
+      - name: test 2
         run: echo ${{ secrets.env.NODE_ENV }}
       - name: Run server
         run: npm run server
