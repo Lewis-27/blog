@@ -16,10 +16,10 @@ permissions:
   id-token: write
 
 env:
-  NODE_ENV: ${{ secrets.NODE_ENV }}
-  PORT: ${{ secrets.PORT }}
-  JWT_SECRET: ${{ secrets.JWT_SECRET }}
-  MONGO_URI: ${{ secrets.MONGO_URI }}
+  NODE_ENV: ${{ secrets.env.NODE_ENV }}
+  PORT: ${{ secrets.env.PORT }}
+  JWT_SECRET: ${{ secrets.env.JWT_SECRET }}
+  MONGO_URI: ${{ secrets.env.MONGO_URI }}
 
 # Allow one concurrent deployment
 concurrency:
