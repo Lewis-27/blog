@@ -53,6 +53,8 @@ jobs:
         with:
           # Upload dist folder
           path: './frontend/dist'
+      - name: Run server
+        run: npm server
       - name: Deploy to GitHub Pages
         id: deployment
         uses: actions/deploy-pages@v4
