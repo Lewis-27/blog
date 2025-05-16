@@ -15,6 +15,12 @@ permissions:
   pages: write
   id-token: write
 
+env:
+  NODE_ENV: ${{ secrets.NODE_ENV }}
+  PORT: ${{ secrets.PORT }}
+  JWT_SECRET: ${{ secrets.JWT_SECRET }}
+  MONGO_URI: ${{ secrets.MONGO_URI }}
+
 # Allow one concurrent deployment
 concurrency:
   group: 'pages'
@@ -27,11 +33,6 @@ jobs:
       name: github-pages
       url: ${{ steps.deployment.outputs.page_url }}
     runs-on: ubuntu-latest
-    env:
-      NODE_ENV: ${{ secrets.NODE_ENV }}
-      PORT: ${{ secrets.PORT }}
-      JWT_SECRET: ${{ secrets.JWT_SECRET }}
-      MONGO_URI: ${{ secrets.MONGO_URI }}
     steps:
       - name: Checkout
         uses: actions/checkout@v4
