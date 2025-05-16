@@ -48,6 +48,12 @@ jobs:
         with:
           # Upload dist folder
           path: './frontend/dist'
+      - name: Prepare env file
+        env:
+          NODE_ENV: ${{secrets.NODE_ENV}}
+          PORT: ${{secrets.PORT}}
+          JWT_SECRET: ${{secrets.JWT_SECRET}}
+          MONGO_URI: ${{secrets.MONGO_URI}}
       - name: Deploy to GitHub Pages
         id: deployment
         uses: actions/deploy-pages@v4
