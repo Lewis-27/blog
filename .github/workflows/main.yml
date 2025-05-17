@@ -40,11 +40,7 @@ jobs:
       - name: Install frontend dependencies
         run: npm ci --prefix frontend
       - name: Build
-        env:
-          NODE_ENV: ${{ secrets.NODE_ENV }}
-          PORT: ${{ secrets.PORT }}
-          JWT_SECRET: ${{ secrets.JWT_SECRET }}
-          MONGO_URI: ${{ secrets.MONGO_URI }}
+        
         run: npm run build
       - name: Setup Pages
         uses: actions/configure-pages@v5
@@ -55,6 +51,11 @@ jobs:
           path: './frontend/dist'
       - name: Run server
         run: npm run server
+        env:
+          NODE_ENV: ${{ secrets.NODE_ENV }}
+          PORT: ${{ secrets.PORT }}
+          JWT_SECRET: ${{ secrets.JWT_SECRET }}
+          MONGO_URI: ${{ secrets.MONGO_URI }}
       - name: Deploy to GitHub Pages
         id: deployment
         uses: actions/deploy-pages@v4
