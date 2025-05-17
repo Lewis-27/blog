@@ -40,12 +40,12 @@ jobs:
       - name: Install frontend dependencies
         run: npm ci --prefix frontend
       - name: Build
-        run: npm run build
         env:
           NODE_ENV: ${{ secrets.NODE_ENV }}
           PORT: ${{ secrets.PORT }}
           JWT_SECRET: ${{ secrets.JWT_SECRET }}
           MONGO_URI: ${{ secrets.MONGO_URI }}
+        run: npm run build
       - name: Setup Pages
         uses: actions/configure-pages@v5
       - name: Upload artifact
