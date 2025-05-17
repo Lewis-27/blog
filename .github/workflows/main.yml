@@ -26,6 +26,11 @@ jobs:
     environment:
       name: github-pages
       url: ${{ steps.deployment.outputs.page_url }}
+    env:
+      NODE_ENV: ${{ secrets.NODE_ENV }}
+      PORT: ${{ secrets.PORT }}
+      JWT_SECRET: ${{ secrets.JWT_SECRET }}
+      MONGO_URI: ${{ secrets.MONGO_URI }}
     runs-on: ubuntu-latest
     steps:
       - name: Checkout
@@ -35,13 +40,6 @@ jobs:
         with:
           node-version: lts/*
           cache: 'npm'
-      - name: Set up environment
-        run:
-          env:
-            NODE_ENV: ${{ secrets.NODE_ENV }}
-            PORT: ${{ secrets.PORT }}
-            JWT_SECRET: ${{ secrets.JWT_SECRET }}
-            MONGO_URI: ${{ secrets.MONGO_URI }}
       - name: Install dependencies
         run: npm ci
       - name: Install frontend dependencies
