@@ -12,7 +12,7 @@ const AllPostsScreen = () => {
   const [displayedPosts, setDisplayedPosts] = useState([]);
   const [page, setPage] = useState(1);
   const [numPerPage, setNumPerPage] = useState(3);
-  const [sort, setSort] = useState('asc');
+  const [sort, setSort] = useState('desc');
   const [totalPage, setTotalPage] = useState();
   const [isLoading, setIsLoading] = useState(true)
   const navigate = useNavigate();
@@ -23,8 +23,8 @@ const AllPostsScreen = () => {
 
   useEffect(() => {
     const getPosts = async () => {
-      const res = await getAllPostsApiCall(`sort=${sort}`);
-      setPosts(res.data.posts);
+      const res = await getAllPostsApiCall(`sort=${sort}`).unwrap();
+      setPosts(res.posts);
       setIsLoading(false);
     }
     getPosts();
@@ -69,14 +69,14 @@ const AllPostsScreen = () => {
           <select name="sort" id="sort" value={sort} onChange={(e) => {
             setSort(e.target.value)
           }} className='cursor-pointer'>
-            <option value='asc' >oldest</option>
             <option value='desc' >newest</option>
+            <option value='asc' >oldest</option>
           </select>
         </div>
         
       </div>
       <div className="flex flex-col items-center justify-start gap-8 grow w-full">
-        {isLoading ? <></> : displayedPosts.map((post) => <PostSmall postData={post}/> )}
+        {isLoading ? <></> : displayedPosts.map((post) => <PostSmall key={post._id} postData={post}/> )}
       </div>
       
       <div className="flex items-center justify-center gap-4 w-full">

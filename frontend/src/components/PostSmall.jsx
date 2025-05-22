@@ -59,7 +59,7 @@ const PostSmall = ({postData}) => {
 
   return (
     <div className='border border-gray-400 shadow-lg w-full flex flex-col items-start justify-around pt-4 pb-2 px-4 rounded-lg'>
-      <div className="flex gap-2 items-center ">
+      <div className="flex flex-col lg:flex-row gap-2 items-center ">
         <Link to={`/posts/${_id}`} className='hover:text-blue-500 transition duration-300'>{title}</Link>
         <div className="flex flex-wrap gap-1 items-center self-start min-w-32">
           <h2 className="">- by</h2>

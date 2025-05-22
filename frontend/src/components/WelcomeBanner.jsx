@@ -41,7 +41,7 @@ const WelcomeBanner = () => {
         </Link>
       </div>
       {isLoading ? <h1>Loading...</h1> : <></>}
-      {(!isLoading && recentPost) ? <div className='w-3/4 lg:w-1/2 flex flex-col gap-4 items-center justify-center'>
+      {(!isLoading && recentPost) ? <div className='w-full px-4 lg:w-1/2 lg:px-0 flex flex-col gap-4 items-center justify-center'>
         <h2>Your latest post</h2>
         <PostSmall postData={recentPost}/></div> : <></>
         // <div className="w-1/2 flex flex-col gap-4 items-center justify-center">
