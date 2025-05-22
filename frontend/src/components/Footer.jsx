@@ -16,7 +16,7 @@ const Footer = () => {
       </div>
       <div className="flex flex-col">
         <h2 className='text-2xl font-semibold'>Navigation</h2>
-        <div className="flex gap-4">
+        <div className="flex flex-col md:flex-row gap-0 md:gap-4">
           <div className="flex flex-col">
             <Link to={'/'}>Homepage</Link>
             <Link to={'/posts'}>Posts</Link>
@@ -34,9 +34,9 @@ const Footer = () => {
 
       <div className="flex flex-col">
         <h2 className='text-2xl font-semibold'>About</h2>
-        <Link to={'/about'}>About this site</Link>
-        <Link to={'/'}>About me</Link>
-        <Link to={'/'}>Portfolio</Link>
+        <Link to={'https://github.com/Lewis-27/blog'}>About this site</Link>
+        <Link to={'https://www.lewis-miller.dev/'}>About me</Link>
+        <Link to={'https://www.lewis-miller.dev/contact'}>Contact</Link>
       </div>
       </div>
       

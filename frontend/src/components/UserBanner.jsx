@@ -30,7 +30,7 @@ const UserBanner = ({userColour}) => {
   return (
     <div className=" w-screen h-50 ">
       <div className={`relative w-screen h-30 ${bannerColour} -z-30`}>
-        <div className="relative p-1 inline-block rounded-full bg-white top-12 left-24"><UserIconLarge userColour={userColour}/></div>
+        <div className="relative p-1 inline-block rounded-full bg-white top-12 left-8 lg:left-24"><UserIconLarge userColour={userColour}/></div>
       </div>
     </div>
   )
